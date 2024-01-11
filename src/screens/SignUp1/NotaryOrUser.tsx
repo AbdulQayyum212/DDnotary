@@ -72,12 +72,7 @@ const NotaryOrUser = () => {
           loading={loading}
           text={'Proceed'}
           onPress={() => {
-            if (dropDownVal === 'User') {
-              navigation.navigate('SignUpIndex');
-            } else if (dropDownVal === 'Notary') {
-              navigation.navigate('NotaryLoginStackNavigator');
-            }
-            dispatch(setUserType(dropDownVal));
+            navigation.navigate('NotaryLoginStackNavigator');
           }}
         />
       </View>

@@ -63,7 +63,7 @@ const Map = ({ route }) => {
     getTravelTime();
   }, [origin, destination, GOOGLE_MAPS_APIKEY]);
   useEffect(() => {
-    if (type === 7) GetCurrentLocation();
+    GetCurrentLocation();
   }, []);
   const GetCurrentLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();

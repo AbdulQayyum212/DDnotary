@@ -357,14 +357,10 @@ const HomeScreen = () => {
               <Box text={'Waiting for Others'} num={dashNumber.waitingForOthers} />
               <Box text={'Expiring Soon'} num={dashNumber.expiringSoon} />
               <Box text={'Completed'} num={dashNumber.completed} />
-              {type === 7 && (
-                <>
-                  <Box text={'Requests'} num={dashNumber.Requests} />
-                  <Box text={'Accepted List'} num={dashNumber.AcceptedList} />
-                  <Box text={'Rejected'} num={dashNumber.Rejected} />
-                  <Box text={'Done'} num={dashNumber.Done} />
-                </>
-              )}
+              <Box text={'Requests'} num={dashNumber.Requests} />
+              <Box text={'Accepted List'} num={dashNumber.AcceptedList} />
+              <Box text={'Rejected'} num={dashNumber.Rejected} />
+              <Box text={'Done'} num={dashNumber.Done} />
             </View>
           </View>
 

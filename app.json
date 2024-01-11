@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Docudash",
-    "slug": "DDash",
+    "name": "DDnotary",
+    "slug": "DDnotary",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -39,7 +39,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.darkwaqar.DDash",
+      "bundleIdentifier": "undefined",
       "config": {
         "googleMapsApiKey": "AIzaSyCSEEKrvzM3-vFcLEoOUf256gzLG7tyWWc"
       }
@@ -49,7 +49,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.darkwaqar.DDash",
+      "package": "undefined",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyCSEEKrvzM3-vFcLEoOUf256gzLG7tyWWc"

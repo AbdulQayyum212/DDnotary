@@ -97,22 +97,20 @@ const DrawerNavigator = () => {
           )}
         </Drawer.Screen>
 
-        {type === 7 && (
-          <Drawer.Screen
-            name="STAMPS"
-            options={{
-              drawerIcon: ({ color }) => (
-                <Icon name="stamper" size={25} style={{ marginRight: -20, color }} />
-              ),
-            }}
-          >
-            {(props) => (
-              <DrawerScreenContainer {...props}>
-                <StampList />
-              </DrawerScreenContainer>
-            )}
-          </Drawer.Screen>
-        )}
+        <Drawer.Screen
+          name="STAMPS"
+          options={{
+            drawerIcon: ({ color }) => (
+              <Icon name="stamper" size={25} style={{ marginRight: -20, color }} />
+            ),
+          }}
+        >
+          {(props) => (
+            <DrawerScreenContainer {...props}>
+              <StampList />
+            </DrawerScreenContainer>
+          )}
+        </Drawer.Screen>
         <Drawer.Screen
           name="CONTACTS"
           options={{
@@ -127,37 +125,34 @@ const DrawerNavigator = () => {
             </DrawerScreenContainer>
           )}
         </Drawer.Screen>
-        {type === 7 ? (
-          <Drawer.Screen
-            name="REQUEST"
-            options={{
-              drawerIcon: ({ color }) => (
-                <Icon name="briefcase" size={25} style={{ marginRight: -20, color }} />
-              ),
-            }}
-          >
-            {(props) => (
-              <DrawerScreenContainer {...props}>
-                <RequestList />
-              </DrawerScreenContainer>
-            )}
-          </Drawer.Screen>
-        ) : (
-          <Drawer.Screen
-            name="REQUEST SENT"
-            options={{
-              drawerIcon: ({ color }) => (
-                <Icon name="briefcase" size={25} style={{ marginRight: -20, color }} />
-              ),
-            }}
-          >
-            {(props) => (
-              <DrawerScreenContainer {...props}>
-                <UserRequestList />
-              </DrawerScreenContainer>
-            )}
-          </Drawer.Screen>
-        )}
+        <Drawer.Screen
+          name="REQUEST"
+          options={{
+            drawerIcon: ({ color }) => (
+              <Icon name="briefcase" size={25} style={{ marginRight: -20, color }} />
+            ),
+          }}
+        >
+          {(props) => (
+            <DrawerScreenContainer {...props}>
+              <RequestList />
+            </DrawerScreenContainer>
+          )}
+        </Drawer.Screen>
+        <Drawer.Screen
+          name="REQUEST SENT"
+          options={{
+            drawerIcon: ({ color }) => (
+              <Icon name="briefcase" size={25} style={{ marginRight: -20, color }} />
+            ),
+          }}
+        >
+          {(props) => (
+            <DrawerScreenContainer {...props}>
+              <UserRequestList />
+            </DrawerScreenContainer>
+          )}
+        </Drawer.Screen>
         <Drawer.Screen
           name="ADDRESSES"
           options={{
@@ -187,22 +182,20 @@ const DrawerNavigator = () => {
             </DrawerScreenContainer>
           )}
         </Drawer.Screen>
-        {type === 7 || (
-          <Drawer.Screen
-            name="FIND NOTARY"
-            options={{
-              drawerIcon: ({ color }) => (
-                <Icon name="map" size={25} style={{ marginRight: -20, color }} />
-              ),
-            }}
-          >
-            {(props) => (
-              <DrawerScreenContainer>
-                <Map />
-              </DrawerScreenContainer>
-            )}
-          </Drawer.Screen>
-        )}
+        <Drawer.Screen
+          name="FIND NOTARY"
+          options={{
+            drawerIcon: ({ color }) => (
+              <Icon name="map" size={25} style={{ marginRight: -20, color }} />
+            ),
+          }}
+        >
+          {(props) => (
+            <DrawerScreenContainer>
+              <Map />
+            </DrawerScreenContainer>
+          )}
+        </Drawer.Screen>
       </>
     </Drawer.Navigator>
   );

@@ -211,8 +211,6 @@ export default function UploadView({ documents, setDocuments }) {
               left={(props) => <List.Icon {...props} icon="folder" />}
             />
             <Divider />
-            {/* {type === 7 && (
-              <> */}
             <List.Item
               onPress={scanDocument}
               title="Scan Upload "
@@ -220,8 +218,6 @@ export default function UploadView({ documents, setDocuments }) {
               left={(props) => <List.Icon {...props} icon="folder" />}
             />
             <Divider />
-            {/* </>
-            )} */}
             <List.Item
               onPress={() => {
                 // @ts-ignore

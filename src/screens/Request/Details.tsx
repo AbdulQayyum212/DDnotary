@@ -181,29 +181,25 @@ const Details = () => {
           <Text style={{ color: COLORS.primary, fontWeight: 'bold', fontSize: 16 }}>
             {'Request Detail'}
           </Text>
-          {user.user_type === 7 ? (
-            <Menu
-              anchorPosition="bottom"
-              visible={visibleMoreHeader}
-              onDismiss={closeMenuMoreHeader}
-              anchor={
-                <IconButton icon="dots-vertical" onPress={(_) => openMenuMoreHeader()}></IconButton>
-              }
-            >
-              <Menu.Item onPress={Accept} title="Accept" />
-              {/* <VoidEnvelopeModel inbox={inbox} navigation={navigation} /> */}
-              <Divider />
-              <Menu.Item onPress={Deny} title="Deny" />
-              {/* <Menu.Item onPress={DeleteEnvelope} title="Delete" /> */}
-              <Divider />
-              <Menu.Item onPress={Done} title="Done" />
-              <Divider />
+          <Menu
+            anchorPosition="bottom"
+            visible={visibleMoreHeader}
+            onDismiss={closeMenuMoreHeader}
+            anchor={
+              <IconButton icon="dots-vertical" onPress={(_) => openMenuMoreHeader()}></IconButton>
+            }
+          >
+            <Menu.Item onPress={Accept} title="Accept" />
+            {/* <VoidEnvelopeModel inbox={inbox} navigation={navigation} /> */}
+            <Divider />
+            <Menu.Item onPress={Deny} title="Deny" />
+            {/* <Menu.Item onPress={DeleteEnvelope} title="Delete" /> */}
+            <Divider />
+            <Menu.Item onPress={Done} title="Done" />
+            <Divider />
 
-              {/* <Menu.Item onPress={ResendEmail} title="Resend Email" /> */}
-            </Menu>
-          ) : (
-            <View></View>
-          )}
+            {/* <Menu.Item onPress={ResendEmail} title="Resend Email" /> */}
+          </Menu>
         </View>
         <ScrollView>
           <View style={tw`p-4 gap-3 py-10 pt-3`}>
