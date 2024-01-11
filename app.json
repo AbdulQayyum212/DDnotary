@@ -1,0 +1,68 @@
+{
+  "expo": {
+    "name": "Docudash",
+    "slug": "DDash",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "plugins": [
+      [
+        "react-native-document-scanner-plugin",
+        {
+          "cameraPermission": "We need camera access, so you can scan documents"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location.",
+          "locationAlwaysPermission": "Allow $(PRODUCT_NAME) to use your location.",
+          "locationWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location.",
+          "isIosBackgroundLocationEnabled": true,
+          "isAndroidBackgroundLocationEnabled": true
+        }
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.Docudash",
+          "enableGooglePay": false
+        }
+      ]
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.darkwaqar.DDash",
+      "config": {
+        "googleMapsApiKey": "AIzaSyCSEEKrvzM3-vFcLEoOUf256gzLG7tyWWc"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.darkwaqar.DDash",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCSEEKrvzM3-vFcLEoOUf256gzLG7tyWWc"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0a4f6e19-eca2-4f79-a0be-0b57d3d5530f"
+      }
+    }
+  }
+}
