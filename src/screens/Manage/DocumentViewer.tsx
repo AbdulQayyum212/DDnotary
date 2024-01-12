@@ -313,7 +313,7 @@ const DocumentViewer = () => {
   useEffect(() => {
     if (recipients) {
       setSelectedRecipient(
-        recipients.findIndex((x) => x.recEmail.toLowerCase() == profileData.email.toLowerCase())
+        recipients.findIndex((x) => x.recEmail?.toLowerCase() == profileData.email?.toLowerCase())
       );
       console.log(recipients?.[selectedRecipient].id);
     }
@@ -353,7 +353,7 @@ const DocumentViewer = () => {
               // )
               ?.map((item, index) => (
                 <View style={[styles.botton_view_buttons]}>
-                  {item.recEmail.toLowerCase() == profileData.email.toLowerCase() && (
+                  {item.recEmail?.toLowerCase() == profileData.email?.toLowerCase() && (
                     <>
                       <Badge style={tw`absolute top-0 right-2 z-1`}>✓</Badge>
                       <View style={styles.yellow_round}>

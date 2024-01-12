@@ -179,8 +179,6 @@ const DocumentEditor = () => {
               title: generateSignatureDetailsFinalise.draggedElArr.title ?? [],
             };
             setDraggedElArr(draggable);
-            refDraggedElArr.current = draggable;
-            // console.log('draggedElArr', draggedElArr);
           }
           setRecipients(generateSignatureDetails);
           setImages(generateSignatureDetailsImages.map((x) => x.filesArr).flat());
