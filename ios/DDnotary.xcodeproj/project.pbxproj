@@ -249,10 +249,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DDnotary/Pods-DDnotary-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/VoxImplantSDK/VoxImplantSDK.framework/VoxImplantSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/VoxImplantWebRTC/VoximplantWebRTC.framework/VoximplantWebRTC",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VoxImplantSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VoximplantWebRTC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

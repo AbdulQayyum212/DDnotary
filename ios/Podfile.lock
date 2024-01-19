@@ -347,6 +347,9 @@ PODS:
     - ReactCommon/turbomodule/core
   - react-native-view-shot (3.5.0):
     - React-Core
+  - react-native-voximplant (1.40.1):
+    - React
+    - VoxImplantSDK (= 2.50.0)
   - react-native-webview (11.26.0):
     - React-Core
   - React-perflogger (0.71.14)
@@ -513,6 +516,9 @@ PODS:
     - StripeUICore (= 23.3.4)
   - StripeUICore (23.3.4):
     - StripeCore (= 23.3.4)
+  - VoxImplantSDK (2.50.0):
+    - VoxImplantWebRTC (= 106.0.1)
+  - VoxImplantWebRTC (106.0.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -561,6 +567,7 @@ DEPENDENCIES:
   - react-native-pdf (from `../node_modules/react-native-pdf`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-view-shot (from `../node_modules/react-native-view-shot`)
+  - react-native-voximplant (from `../node_modules/react-native-voximplant`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -601,6 +608,8 @@ SPEC REPOS:
     - StripePaymentSheet
     - StripePaymentsUI
     - StripeUICore
+    - VoxImplantSDK
+    - VoxImplantWebRTC
 
 EXTERNAL SOURCES:
   boost:
@@ -689,6 +698,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-view-shot:
     :path: "../node_modules/react-native-view-shot"
+  react-native-voximplant:
+    :path: "../node_modules/react-native-voximplant"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-perflogger:
@@ -788,6 +799,7 @@ SPEC CHECKSUMS:
   react-native-pdf: 79aa75e39a80c1d45ffe58aa500f3cf08f267a2e
   react-native-safe-area-context: 39c2d8be3328df5d437ac1700f4f3a4f75716acc
   react-native-view-shot: 792829857bbb23a9c8acdad9a640554bdee397a3
+  react-native-voximplant: dd49e1fc7ba32b132b40f4ffff627d0f3f8ba952
   react-native-webview: 994b9f8fbb504d6314dc40d83f94f27c6831b3bf
   React-perflogger: 4987ad83731c23d11813c84263963b0d3028c966
   React-RCTActionSheet: 5ad952b2a9740d87a5bd77280c4bc23f6f89ea0c
@@ -820,6 +832,8 @@ SPEC CHECKSUMS:
   StripePaymentSheet: 722ea7bea092c243d771122fe3572a9c84512704
   StripePaymentsUI: fd08081c4be73c16322dc76a1878140520a9df2e
   StripeUICore: ed68cbd5ad0626e0760e772f8c82d96cae9b829b
+  VoxImplantSDK: 7ff484315bb557b2471e28ad4d3f007119ad7070
+  VoxImplantWebRTC: db29562c228542d16240401e5fc897441c014ba6
   Yoga: e71803b4c1fff832ccf9b92541e00f9b873119b9
 
 PODFILE CHECKSUM: 7cefea1c73d89b96bfc290e89d1ea431ca6bed29
