@@ -11,7 +11,7 @@ import { time } from '@utils/requestTime';
 import { requestType } from '@utils/requestType';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Image, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { Image, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import { Button, Divider, IconButton, Menu, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,6 +61,7 @@ const Details = () => {
   const [denyLoading, setDenyLoading] = useState(false);
   const [doneLoading, setDoneLoading] = useState(false);
   const [recipients, setRecipients] = useState<NotaryRequestsDetail[]>([]);
+  const [generateSignature, setGenerateSignature] = useState();
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
   // console.log('origin', details);
@@ -95,6 +96,7 @@ const Details = () => {
   //     navigation.navigate('Map');
   //   }
   // }, [destination]);
+
   const Accept = () => navigation.navigate('ApproveRequest', { id: id });
   const Done = () => {
     setDoneLoading(true);
@@ -111,7 +113,7 @@ const Details = () => {
         }
       )
       .then((response) => {
-        // console.log(response.data);
+        // console.log('Done', response.data);
         setDoneLoading(false);
         navigation.goBack();
       })
@@ -159,10 +161,11 @@ const Details = () => {
           NotaryRequests,
           NotaryRequestsDetails,
           NotaryRequestsDetailsDocuments,
+          generateSignature,
         }: RequestDetailsPage = response.data;
-        // console.log('NotaryRequests', NotaryRequests);
-
+        setGenerateSignature(generateSignature);
         setDetails(NotaryRequests);
+        console.log(NotaryRequestsDetails);
         setRecipients(NotaryRequestsDetails);
         setDocumentDetails(NotaryRequestsDetailsDocuments);
       })
@@ -173,7 +176,9 @@ const Details = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  ``;
   if (details)
+    //  console.log('Hello', details);
     return (
       <SafeAreaView style={tw`h-full`}>
         <View style={styles.header}>
@@ -181,25 +186,29 @@ const Details = () => {
           <Text style={{ color: COLORS.primary, fontWeight: 'bold', fontSize: 16 }}>
             {'Request Detail'}
           </Text>
-          <Menu
-            anchorPosition="bottom"
-            visible={visibleMoreHeader}
-            onDismiss={closeMenuMoreHeader}
-            anchor={
-              <IconButton icon="dots-vertical" onPress={(_) => openMenuMoreHeader()}></IconButton>
-            }
-          >
-            <Menu.Item onPress={Accept} title="Accept" />
-            {/* <VoidEnvelopeModel inbox={inbox} navigation={navigation} /> */}
-            <Divider />
-            <Menu.Item onPress={Deny} title="Deny" />
-            {/* <Menu.Item onPress={DeleteEnvelope} title="Delete" /> */}
-            <Divider />
-            <Menu.Item onPress={Done} title="Done" />
-            <Divider />
+          {user.user_type === 7 ? (
+            <Menu
+              anchorPosition="bottom"
+              visible={visibleMoreHeader}
+              onDismiss={closeMenuMoreHeader}
+              anchor={
+                <IconButton icon="dots-vertical" onPress={(_) => openMenuMoreHeader()}></IconButton>
+              }
+            >
+              <Menu.Item onPress={Accept} title="Accept" />
+              {/* <VoidEnvelopeModel inbox={inbox} navigation={navigation} /> */}
+              <Divider />
+              <Menu.Item onPress={Deny} title="Deny" />
+              {/* <Menu.Item onPress={DeleteEnvelope} title="Delete" /> */}
+              <Divider />
+              <Menu.Item onPress={Done} title="Done" />
+              <Divider />
 
-            {/* <Menu.Item onPress={ResendEmail} title="Resend Email" /> */}
-          </Menu>
+              {/* <Menu.Item onPress={ResendEmail} title="Resend Email" /> */}
+            </Menu>
+          ) : (
+            <View></View>
+          )}
         </View>
         <ScrollView>
           <View style={tw`p-4 gap-3 py-10 pt-3`}>
@@ -219,7 +228,7 @@ const Details = () => {
                   title={
                     <Text style={tw`text-black`}>
                       <Text style={tw`font-bold text-black`}>Created At: </Text>
-                      {new Date(details.created_at).toUTCString().slice(0, 17)}
+                      {new Date(details?.created_at).toUTCString().slice(0, 17)}
                     </Text>
                   }
                 />
@@ -228,7 +237,7 @@ const Details = () => {
                   title={
                     <Text style={tw`text-black`}>
                       <Text style={tw`font-bold text-black`}>Modified At: </Text>
-                      {new Date(details.updated_at).toUTCString().slice(0, 17)}
+                      {new Date(details?.updated_at).toUTCString().slice(0, 17)}
                     </Text>
                   }
                 />
@@ -237,7 +246,7 @@ const Details = () => {
                   title={
                     <Text style={tw`text-black`}>
                       <Text style={tw`font-bold text-black`}>User: </Text>
-                      {details.individual_details.first_name}
+                      {details?.individual_details.first_name}
                     </Text>
                   }
                 />
@@ -246,7 +255,7 @@ const Details = () => {
                   title={
                     <Text style={tw`text-black`}>
                       <Text style={tw`font-bold text-black`}>Notary: </Text>
-                      {details.notary_details.first_name}
+                      {details?.notary_details.first_name}
                     </Text>
                   }
                 />
@@ -257,73 +266,109 @@ const Details = () => {
               <Text variant="labelLarge">
                 Reason of the request:{' '}
                 <Text style={tw`text-[#6FAC46]`}>
-                  {reasons.find((x) => x.value == details.reasonOfRequest.toString())?.label}
+                  {reasons.find((x) => x.value == details?.reasonOfRequest.toString())?.label}
                 </Text>
               </Text>
               <Text variant="labelLarge">
-                Availability Date: <Text style={tw`text-[#6FAC46]`}> {details.requestDate}</Text>
+                Availability Date: <Text style={tw`text-[#6FAC46]`}> {details?.requestDate}</Text>
               </Text>
               <Text variant="labelLarge">
                 Availability Time:{' '}
                 <Text style={tw`text-[#6FAC46]`}>
-                  {time.find((x) => x.value == details.requestTime.toString())?.label}
+                  {time.find((x) => x.value == details?.requestTime.toString())?.label}
                 </Text>
               </Text>
               <Text variant="labelLarge">
                 Number of User To Sign:{' '}
-                <Text style={tw`text-[#6FAC46]`}>{details.numOfRecipients}</Text>
+                <Text style={tw`text-[#6FAC46]`}>{details?.numOfRecipients}</Text>
               </Text>
               <Text variant="labelLarge">
                 Number of Pages Uploaded:{' '}
-                <Text style={tw`text-[#6FAC46]`}>{details.reasonOfRequest}</Text>
+                <Text style={tw`text-[#6FAC46]`}>{details?.reasonOfRequest}</Text>
               </Text>
               <Text variant="labelLarge">
                 Create Date:{' '}
                 <Text style={tw`text-[#6FAC46]`}>
-                  {new Date(details.created_at).toUTCString().slice(0, 17)}
+                  {new Date(details?.created_at).toUTCString().slice(0, 17)}
                 </Text>
               </Text>
               <Text variant="labelLarge">
                 Create By:{' '}
-                <Text style={tw`text-[#6FAC46]`}>{details.individual_details.first_name}</Text>
+                <Text style={tw`text-[#6FAC46]`}>{details?.individual_details.first_name}</Text>
               </Text>
               <Text variant="labelLarge">
                 Address:{' '}
                 <Text style={tw`text-[#6FAC46]`}>
-                  {details.individual_details.address1 || 'NO ADDRESS AVAILABLE'}
+                  {details?.individual_details.address1 || 'NO ADDRESS AVAILABLE'}
                 </Text>
               </Text>
-              {details.amount != null && (
+              <Text variant="labelLarge">
+                Notary Name: <Text style={tw`text-[#6FAC46]`}>{details?.notary_details?.name}</Text>
+              </Text>
+              {details?.amount != null && (
                 <Text variant="labelLarge">
-                  Amount: <Text style={tw`text-[#6FAC46]`}>{`$${details.amount}`}</Text>
+                  Amount: <Text style={tw`text-[#6FAC46]`}>{`$${details?.amount}`}</Text>
                 </Text>
               )}
-              {requestType.find((x) => x.value == details.notary_request_status.toString())
+              {requestType.find((x) => x.value == details?.notary_request_status.toString())
                 ?.label === 'Accepted' && (
-                <Button
-                  style={tw`w-40`}
-                  mode="contained"
-                  loading={acceptLoading}
-                  disabled={acceptLoading}
-                  // onPress={Accept}
-                  onPress={() => {
-                    dispatch(setDestination(details.request_location_list));
-                    if (destination == null) {
-                      GetCurrentLocation();
-                    } else {
-                      GetCurrentLocation();
-                    }
-                  }}
-                >
-                  {user.user_type === 7 ? 'Navigate' : 'View Your Notary Location'}
-                </Button>
+                <View style={tw`flex-row items-center gap-2`}>
+                  <Button
+                    style={tw`w-40`}
+                    mode="contained"
+                    loading={acceptLoading}
+                    disabled={acceptLoading}
+                    // onPress={Accept}
+                    onPress={() => {
+                      dispatch(setDestination(details.request_location_list));
+                      if (destination == null) {
+                        GetCurrentLocation();
+                      } else {
+                        GetCurrentLocation();
+                      }
+                    }}
+                  >
+                    {user.user_type === 7 ? 'Navigate' : 'View Your Notary Location'}
+                  </Button>
+                  <Button
+                    style={[
+                      tw`  rounded-full items-center justify-center`,
+                      { width: 50, height: 45 },
+                    ]}
+                    mode="contained"
+                    loading={acceptLoading}
+                    disabled={acceptLoading}
+                    onPress={() => {
+                      const callingUser: {
+                        user_id: string;
+                        user_name: string;
+                        user_display_name: string;
+                      } = {
+                        user_id: '3',
+                        user_name:
+                          user.user_type == 7
+                            ? details?.individual_details.email
+                            : details?.notary_details?.email,
+                        user_display_name:
+                          user.user_type == 7
+                            ? details?.individual_details.name
+                            : details?.notary_details?.name,
+                      };
+                      console.log('log', details);
+
+                      navigation.navigate('Calling', { user: callingUser });
+                    }}
+                  >
+                    <Icon name="phone" size={20} />
+                  </Button>
+                </View>
               )}
             </View>
 
             {/* Buttons */}
             {user.user_type === 7 ? (
               <View style={tw`flex-row items-center  gap-3 py-5`}>
-                {details.notary_request_status === 1 ? (
+                {details?.notary_request_status === 1 ? (
                   <>
                     <View style={tw` items-center gap-5 py-2 justify-center`}>
                       <Button
@@ -348,16 +393,20 @@ const Details = () => {
                     </View>
                   </>
                 ) : (
-                  // status ===2
                   <>
-                    <View style={tw` items-center gap-5 py-2 justify-center`}>
+                    <View style={tw` items-center gap-5 py-2 justify-center `}>
                       <Button
                         mode="contained"
                         loading={doneLoading}
                         disabled={doneLoading}
-                        onPress={Done}
+                        onPress={() =>
+                          navigation.navigate('DocumentViewer', {
+                            Envelope: details,
+                            generateSignature: generateSignature,
+                          })
+                        }
                       >
-                        Done
+                        View Document Completed
                       </Button>
                     </View>
                   </>
@@ -368,16 +417,17 @@ const Details = () => {
                 Request Status:{' '}
                 <Text style={tw`text-[#6FAC46]`}>
                   {
-                    requestType.find((x) => x.value == details.notary_request_status.toString())
+                    requestType.find((x) => x.value == details?.notary_request_status.toString())
                       ?.label
                   }
                 </Text>
               </Text>
             )}
+
             <View style={tw`py-10 gap-4`}>
               <Text style={styles.heading}>Uploaded Documents</Text>
               <View>
-                {documentDetails.map((e, i) => (
+                {documentDetails?.map((e, i) => (
                   <View style={tw` mt-2 border-2 border-[${colors.green}] rounded-lg p-3  gap-1`}>
                     <Text style={tw`text-black text-4 font-semibold`}>{e.document}</Text>
                     <Text style={tw`text-gray-400`}> {new Date(e?.created_at).toUTCString()}</Text>
@@ -422,7 +472,7 @@ const Details = () => {
             <View style={tw`py-2`}>
               <Text style={styles.heading}>Message</Text>
               <View style={tw`m-3 mt-5`}>
-                <Text style={tw`font-thin`}>{details.requestMessage}</Text>
+                <Text style={tw`font-thin`}>{details?.requestMessage}</Text>
               </View>
             </View>
           </View>

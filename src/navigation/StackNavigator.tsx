@@ -22,7 +22,12 @@ import AddSignature from '@screens/Signatures/AddSignature';
 import Signatures from '@screens/Signatures/List';
 import AddStamp from '@screens/Stamp/AddStamps';
 import Stamps from '@screens/Stamp/List';
-import { selectAccessToken, setUserStep } from '@stores/slices/UserSlice';
+import {
+  selectAccessToken,
+  selectProfileData,
+  selectUser,
+  setUserStep,
+} from '@stores/slices/UserSlice';
 import { StripeProvider } from '@stripe/stripe-react-native';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,14 +39,19 @@ import Calling from '@screens/Calling';
 import Call from '@screens/Call';
 import IncomingCallScreen from '@screens/IncomingCall';
 import { Voximplant } from 'react-native-voximplant';
+import { useNavigation } from '@react-navigation/native';
+import calls from '@screens/Store';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const APP_NAME = 'docudash';
 const ACC_NAME = 'wizard.n2';
-const password = '123123';
-const username = 'urspecial1one';
+const password = '12345678';
 export default function StackNavigator() {
   const user = useSelector(selectAccessToken);
+  const navigation = useNavigation();
+  const userInfo = useSelector(selectProfileData);
+  const username = userInfo?.email?.split('@')[0];
+  console.log(username);
 
   const voximplant = Voximplant.getInstance();
   function convertCodeMessage(code: number) {
@@ -56,6 +66,17 @@ export default function StackNavigator() {
         return 'Try again later';
     }
   }
+  useEffect(() => {
+    voximplant.on(Voximplant.ClientEvents.IncomingCall, (incomingCallEvent) => {
+      calls.set(incomingCallEvent.call.callId, incomingCallEvent.call);
+      navigation.navigate('IncomingCall', {
+        call: incomingCallEvent.call,
+      });
+    });
+    return function cleanup() {
+      voximplant.off(Voximplant.ClientEvents.IncomingCall);
+    };
+  });
   useEffect(() => {
     const Login = async () => {
       try {
@@ -87,7 +108,7 @@ export default function StackNavigator() {
     };
 
     Login();
-  }, []);
+  }, [user]);
   return (
     <StripeProvider
       merchantIdentifier="merchant.com.Docudash"
@@ -135,8 +156,8 @@ export default function StackNavigator() {
           </Stack.Group>
         ) : (
           <Stack.Group>
-            <Stack.Screen name="NotaryOrUser" component={NotaryOrUser} />
-            <Stack.Screen name="SignUpIndex" component={LoginStackNavigator} />
+            {/* <Stack.Screen name="NotaryOrUser" component={NotaryOrUser} /> */}
+            {/* <Stack.Screen name="SignUpIndex" component={LoginStackNavigator} /> */}
             <Stack.Screen name="NotaryLoginStackNavigator" component={NotaryLoginStackNavigator} />
           </Stack.Group>
         )}
