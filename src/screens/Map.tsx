@@ -21,7 +21,7 @@ import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import moment from 'moment';
 
 const Map = ({ route }) => {
-  const { notary_id } = route?.params?.details;
+  const { notary_id, id } = route?.params?.details;
   const user = useSelector(selectProfileData);
   const type = user?.user_type;
   const GOOGLE_MAPS_APIKEY = 'AIzaSyCSEEKrvzM3-vFcLEoOUf256gzLG7tyWWc';
@@ -94,7 +94,7 @@ const Map = ({ route }) => {
   const PostCurrentLocation = (region: any) => {
     // console.log(region);
     console.log('obj', {
-      NotaryRequestsReturnID: notary_id,
+      NotaryRequestsReturnID: id,
       long: region.lng,
       lat: region.lat,
       accessToken,
@@ -104,7 +104,7 @@ const Map = ({ route }) => {
       .post(
         'https://docudash.net/api/create-request-locations-update',
         {
-          NotaryRequestsReturnID: notary_id,
+          NotaryRequestsReturnID: id,
           long: region.lng,
           lat: region.lat,
         },
