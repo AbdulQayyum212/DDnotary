@@ -25,7 +25,8 @@ const EmailScreen = () => {
   const route = useNavigation<SignUpStackScreenProps<'Index'>['route']>();
   // const [inputVal, setInputVal] = useState<string>('thomas@yopmail.com');
   // const [inputVal, setInputVal] = useState<string>('santiagostokes@yopmail.com');
-  const [inputVal, setInputVal] = useState<string>('leiyattouhinei-6529@yopmail.com');
+  // const [inputVal, setInputVal] = useState<string>('leiyattouhinei-6529@yopmail.com');
+  const [inputVal, setInputVal] = useState<string>('Croiffasouyesa-4141@yopmail.com');
   const [checked, setChecked] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [visible, setVisible] = React.useState(false);
