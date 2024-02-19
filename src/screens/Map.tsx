@@ -19,6 +19,7 @@ import COLORS from '../constants/colors';
 import { useNavigation } from '@react-navigation/native';
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import moment from 'moment';
+import { LocationUpdateResponse } from 'src/types/Location';
 
 const Map = ({ route }) => {
   const { notary_id, id } = route?.params?.details;
@@ -29,12 +30,12 @@ const Map = ({ route }) => {
   const destination = useSelector(selectDestination);
   const accessToken = useSelector(selectAccessToken);
   const navigation = useNavigation();
-  const [notaryDetail, setNotaryDetail] = useState([]);
+  const [notaryDetail, setNotaryDetail] = useState<LocationUpdateResponse>();
   const dispatch = useDispatch();
   const snapPoints = useMemo(() => ['10', '67'], []);
   const mapRef = useRef<MapView>(null);
   const panelRef = useRef(null);
-  console.log('notaryDetail', notaryDetail.first_name);
+
   const handleSheetChanges = useCallback((index: number) => {
     // console.log('handleSheetChanges', index);
   }, []);
@@ -129,7 +130,8 @@ const Map = ({ route }) => {
         // }
       });
   };
-  if (destination === null || origin === null) return;
+  if (destination === null || origin === null || notaryDetail == undefined) return;
+  console.log('notaryDetail', notaryDetail.NotaryRequests.notary_details.first_name);
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
       <View

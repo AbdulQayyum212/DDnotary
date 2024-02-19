@@ -76,7 +76,7 @@ const PasswordScreen = () => {
             />
           </View>
           <View style={[tw`items-center justify-center mt-3`]}>
-            <Text style={tw`text-[20px]`}>Wellcome Back</Text>
+            <Text style={tw`text-[20px]`}>Welcome Back</Text>
           </View>
           <Input
             state={password}

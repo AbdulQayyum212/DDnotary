@@ -19,6 +19,8 @@ import { selectProfileData } from '@stores/slices/UserSlice';
 import { colors } from '@utils/Colors';
 import { useSelector } from 'react-redux';
 import ScanDocument from '@screens/Notary/ScanDocument';
+import { View } from 'react-native';
+import Notification from '@screens/Notification';
 
 const Drawer = createDrawerNavigator();
 
@@ -179,6 +181,22 @@ const DrawerNavigator = () => {
           {(props) => (
             <DrawerScreenContainer>
               <Profile />
+            </DrawerScreenContainer>
+          )}
+        </Drawer.Screen>
+        <Drawer.Screen
+          name="Notification"
+          options={{
+            drawerIcon: ({ color }) => (
+              <View>
+                <Icon name="bell-outline" size={25} style={{ marginRight: -20, color }} />
+              </View>
+            ),
+          }}
+        >
+          {(props) => (
+            <DrawerScreenContainer>
+              <Notification />
             </DrawerScreenContainer>
           )}
         </Drawer.Screen>
