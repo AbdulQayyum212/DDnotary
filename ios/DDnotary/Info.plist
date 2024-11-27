@@ -25,7 +25,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.darkwaqar.DDash</string>
+          <string>undefined</string>
         </array>
       </dict>
     </array>

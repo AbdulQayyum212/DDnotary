@@ -186,14 +186,14 @@ const CreateARequest = () => {
   };
   const createRequestPayment = (NotaryRequestsReturnID: string, amount: number) => {
     let formData = new FormData();
-    formData.append('NotaryRequestsReturnID', NotaryRequestsReturnID);
+    // formData.append('NotaryRequestsReturnID', NotaryRequestsReturnID);
     formData.append('amount', amount);
     let headers = {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'multipart/form-data',
     };
     axios
-      .post('https://docudash.net/api/create-request-payment', formData, { headers })
+      .post('https://docudash.net/api/create-request-payment-envelope', formData, { headers })
       .then((response) => {
         setLoading(false);
         // console.log('response', response);
